@@ -1,0 +1,67 @@
+MI TIENDA - Proyecto React
+Descripción:
+-------------
+Este proyecto simula una tienda online desarrollada con React. 
+Permite visualizar productos, agregar al carrito, realizar un pedido simulado y enviar un formulario de contacto. 
+Está orientado a prácticas de frontend, diseño editorial y simulación de backend con MockAPI.
+
+Características principales:
+-----------------------------
+- Visualización de productos con tarjetas editoriales
+- Alta de productos con validación/ editar-borrar- crud completo
+- Carrito funcional con contexto global
+- Confirmación de pedido simulada vía MockAPI
+- Formulario de contacto con envío simulado/con un alert
+- Navegación con React Router
+- Diseño responsive 
+
+Tecnologías utilizadas:
+------------------------
+- React + Vite
+- React Router DOM
+- Context API
+- CSS personalizado
+- Font Awesome
+- MockAPI (máximo 2 endpoints activos gratuitos)
+
+Endpoints simulados:
+---------------------
+- PRODUCTOS_URL: https://6908e53d2d902d0651b21158.mockapi.io/productos
+- CONTACTO_URL: https://6908e53d2d902d0651b21158.mockapi.io/contacto
+- CARRITO_URL: Simulado localmente (no activo en MockAPI)
+
+Estructura del proyecto:
+-------------------------
+- /components: Header, Footer, ProductCard, Carrito, FormAlta, FormContacto
+- /context: CartContext.js
+- /assets: Imágenes y logo institucional
+- /api: ApiConfig.js con rutas simuladas
+- /nosotros : Institucional
+
+Cómo ejecutar:
+---------------
+1. Clonar el repositorio
+2. Instalar dependencias con `npm install`
+3. Ejecutar el proyecto con `npm run dev`
+4. Acceder a http://localhost:5173
+
+Notas:
+-------
+- El formulario de contacto no envía datos reales, pero simula el flujo con una ruta ficticia.
+- El carrito se reinicia al confirmar el pedido.
+- El diseño está adaptado para pantallas móviles y escritorio.
+
+plus: Simulé una ruta protegida con PIN usando una variable de entorno .env , como se haría en producción para evitar exponer credenciales
+
+Plan de mejora a futuro:
+- Agregar Login con ciberseguridad e integridad de datos, doble factor de autentificación, bloqueo ips recurrentes, regex
+- Agregar Rutas protegidas con ciberseguridad
+- Agregar Filtros por categoria-rangos de precios-crear-algoritmo por cookies? si se puede 
+- Boton de pago
+- Form contacto real no simulado
+- Optimizar base de datos en Mongo y consultas
+- Api con backend
+
+
+Romina Aldrovandi    
+© 2025 - Todos los derechos reservados
