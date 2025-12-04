@@ -948,3 +948,65 @@ padding: 10px 0;
     font-size: 14px;
   }
 }
+
+/* =========================================================
+   ICONOS EN HOME - 
+========================================================= */
+
+
+@media (max-width: 1024px) {
+  .categorias-icons {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .categorias-icons button {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .categorias-icons svg {
+    font-size: 18px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .categorias-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .categorias-icons button {
+    flex: 1 1 45%; 
+    justify-content: center;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .categorias-icons svg {
+    font-size: 18px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .categorias-icons {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .categorias-icons button {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .categorias-icons svg {
+    font-size: 20px;
+  }
+}
