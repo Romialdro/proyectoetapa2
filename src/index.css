@@ -638,7 +638,7 @@ input[type=number] {
 }
 
 .btn-editar {
-  background-color: #fdd835; /* amarillo */
+  background-color: #fdd835; 
   color: #000;
   border: none;
   padding: 6px 12px;
@@ -675,7 +675,6 @@ input[type=number] {
   width: 100%;
   min-height: 300px;
   display: flex;
-  margin-left: 550px;
   align-items: center;
   justify-content: center;
 }
