@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, useEffect } from "react";
+import { BACKEND_URL } from "../api/ApiConfig"; // <--- AGREGAMOS ESTO
 
 const CartContext = createContext();
 
@@ -12,7 +13,7 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   }, [carrito]);
 
-  // Limpieza automática
+  // Limpieza automática a los 10 minutos
   useEffect(() => {
     if (carrito.length === 0) return;
 
@@ -49,7 +50,10 @@ export const CartProvider = ({ children }) => {
     0
   );
 
-  const confirmarPedido = () => {
+  // --------------------------------------------------------------
+  // Confirmar pedido, cambios backend, ENVÍA AL BACKEND EXPRESS
+  // --------------------------------------------------------------
+  const confirmarPedido = async () => {
     if (carrito.length === 0) return alert("El carrito está vacío.");
 
     const pedido = {
@@ -58,16 +62,39 @@ export const CartProvider = ({ children }) => {
       fecha: new Date().toISOString(),
     };
 
-    console.log("Simulando envío de pedido:", pedido);
-    alert("Pedido confirmado con éxito.");
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/carrito`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pedido),
+      });
 
-    
-    const historial = JSON.parse(localStorage.getItem("pedidos") || "[]");
-    historial.push(pedido);
-    localStorage.setItem("pedidos", JSON.stringify(historial));
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({
+          error: "Error al parsear respuesta",
+        }));
+        console.error("Error al enviar pedido:", err);
+        return alert("No se pudo confirmar el pedido. Intentá nuevamente.");
+      }
 
-    setCarrito([]);
+      const data = await res.json();
+      console.log("Respuesta backend:", data);
+
+      alert("Pedido confirmado con éxito.");
+
+      // Guardar historial local
+      const historial = JSON.parse(localStorage.getItem("pedidos") || "[]");
+      historial.push({ ...pedido, serverId: data.id || null });
+      localStorage.setItem("pedidos", JSON.stringify(historial));
+
+      // Vaciado del carrito
+      setCarrito([]);
+    } catch (error) {
+      console.error("Error de red al enviar pedido:", error);
+      alert("Hubo un error de conexión. Intentá nuevamente.");
+    }
   };
+  // --------------------------------------------------------------
 
   return (
     <CartContext.Provider

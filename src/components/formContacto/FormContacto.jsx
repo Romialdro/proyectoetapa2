@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BACKEND_URL } from "../../api/ApiConfig";
 
 function FormContacto() {
   const [form, setForm] = useState({
@@ -25,7 +26,7 @@ function FormContacto() {
     };
 
     try {
-      const res = await fetch("https://6908e53d2d902d0651b21158.mockapi.io/contacto", {
+      const res = await fetch(`${BACKEND_URL}/api/contacto`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -39,18 +40,15 @@ function FormContacto() {
       }
     } catch (error) {
       console.error("Error al enviar:", error);
+      alert("Error de conexión.");
     }
-
-    // Simulación de envío sin backend
-    /* console.log("Simulando envío de mensaje:", payload);
-    alert("Mensaje enviado con éxito.");
-    setForm({ nombre: "", email: "", comentarios: "" }); */
   };
 
   return (
     <section className="form-wrapper">
       <h2><i className="fas fa-envelope"></i> Contacto</h2>
       <form onSubmit={handleSubmit} className="alta-form">
+
         <div className="input-group">
           <label htmlFor="nombre">Nombre *</label>
           <input
@@ -86,6 +84,7 @@ function FormContacto() {
         </div>
 
         <button type="submit">Enviar</button>
+
       </form>
     </section>
   );
