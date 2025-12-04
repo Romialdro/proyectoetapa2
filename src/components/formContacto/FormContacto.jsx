@@ -19,17 +19,11 @@ function FormContacto() {
       return alert("Completá todos los campos obligatorios.");
     }
 
-    const payload = {
-      nombre: String(form.nombre),
-      email: String(form.email),
-      comentarios: String(form.comentarios),
-    };
-
     try {
       const res = await fetch(`${BACKEND_URL}/api/contacto`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(form),
       });
 
       if (res.ok) {
@@ -38,8 +32,8 @@ function FormContacto() {
       } else {
         alert("Error al enviar el mensaje.");
       }
-    } catch (error) {
-      console.error("Error al enviar:", error);
+    } catch (err) {
+      console.error("Error:", err);
       alert("Error de conexión.");
     }
   };
@@ -47,8 +41,8 @@ function FormContacto() {
   return (
     <section className="form-wrapper">
       <h2><i className="fas fa-envelope"></i> Contacto</h2>
-      <form onSubmit={handleSubmit} className="alta-form">
 
+      <form onSubmit={handleSubmit} className="alta-form">
         <div className="input-group">
           <label htmlFor="nombre">Nombre *</label>
           <input
@@ -80,16 +74,13 @@ function FormContacto() {
             value={form.comentarios}
             onChange={handleChange}
             required
-          ></textarea>
+          />
         </div>
 
         <button type="submit">Enviar</button>
-
       </form>
     </section>
   );
 }
 
 export default FormContacto;
-
- 
